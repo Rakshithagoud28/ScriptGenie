@@ -9,3 +9,5 @@ streamlit
 groq
 requests
 pillow
+gtts
+
