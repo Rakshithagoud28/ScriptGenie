@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from groq import Groq
 from deep_translator import GoogleTranslator
-import pyttsx3
+from gtts import gTTS  # ✅ Replaced pyttsx3 with gTTS
 
 # Set Groq API key
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -26,7 +26,10 @@ user_topic = st.text_input("Enter your video topic:", placeholder="e.g., How AI 
 chat_mode = st.sidebar.checkbox("🧞‍♀️ Enable Script Chat Mode (Refine Your Script)")
 refine_instruction = ""
 if chat_mode:
-    refine_instruction = st.sidebar.selectbox("Choose Refinement:", ["Make it funnier", "Make it more engaging", "Make it shorter", "Add emotional tone"])
+    refine_instruction = st.sidebar.selectbox(
+        "Choose Refinement:", 
+        ["Make it funnier", "Make it more engaging", "Make it shorter", "Add emotional tone"]
+    )
 
 # Script Generation Button
 if st.button("✨ Generate Script") and user_topic:
@@ -43,9 +46,7 @@ if st.button("✨ Generate Script") and user_topic:
         # Generate Response from Groq
         chat_completion = client.chat.completions.create(
             model="llama3-70b-8192",
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+            messages=[{"role": "user", "content": prompt}]
         )
 
         script = chat_completion.choices[0].message.content.strip()
@@ -57,12 +58,11 @@ if st.button("✨ Generate Script") and user_topic:
         st.subheader("📜 Your Script")
         st.text_area("YouTube Video Script", script, height=350)
 
-        # Voiceover TTS (only for English)
+        # Voiceover using gTTS (only for English)
         if voiceover and language == "English":
             try:
-                tts = pyttsx3.init()
-                tts.save_to_file(script, "voiceover.mp3")
-                tts.runAndWait()
+                tts = gTTS(text=script, lang='en')
+                tts.save("voiceover.mp3")
                 audio_file = open("voiceover.mp3", "rb")
                 st.audio(audio_file.read(), format="audio/mp3")
             except Exception as e:
