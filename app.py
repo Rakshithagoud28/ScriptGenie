@@ -65,7 +65,7 @@ if st.button("✨ Generate Script") and user_topic:
                 audio_file = open("voiceover.mp3", "rb")
                 st.audio(audio_file.read(), format="audio/mp3")
             except Exception as e:
-                st.error(f"Voiceover generation failed: {str(e)}")
+                st.error(f"Voiceover generation only Available in English : {str(e)}")
 
         # 🎬 Auto Video Ideas
         st.subheader("🎬 Video Ideas & SEO")
