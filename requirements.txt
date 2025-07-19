@@ -1,0 +1,11 @@
+streamlit
+requests
+python-dotenv
+streamlit
+requests
+python-dotenv
+deep_translator
+streamlit
+groq
+requests
+pillow
