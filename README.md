@@ -1,6 +1,6 @@
 # 🎬 ScriptGenie - AI-Powered YouTube Script Generator
 
-**ScriptGenie** is a fun and powerful Streamlit app that helps you generate high-quality YouTube video scripts using Groq's blazing fast LLMs.\n
+**ScriptGenie** is a fun and powerful Streamlit app that helps you generate high-quality YouTube video scripts using Groq's blazing fast LLMs.  
 **Try It Here** : https://rakss-scriptgenie.streamlit.app/
 
 ### ✨ Features
